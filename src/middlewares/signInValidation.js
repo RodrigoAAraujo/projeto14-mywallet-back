@@ -1,8 +1,16 @@
 import { usersCollection } from "../database/db.js";
+import { signInSchema } from "../models/userSchemas.js";
 import bcrypt from 'bcrypt'
 
 export default async function signInValidation(req,res, next){
     const {email, password} =req.body
+
+    const {error}= signInSchema.validate(req.body)
+
+    if(error){
+        res.status(400).send(error.details.map(detail => detail.message))
+        return
+    }
 
     try{
        const userExist = await usersCollection.findOne({email: email})

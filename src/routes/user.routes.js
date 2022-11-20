@@ -5,7 +5,7 @@ import signUpValidation from "../middlewares/signUpValidation.js"
 
 const router = Router()
 
-router.post("/sign-in", signInValidation, SignIn)
-router.post("/sign-up", signUpValidation, SignUp)
+router.post("/sign-in",  signInValidation, SignIn)
+router.post("/sign-up",  signUpValidation, SignUp)
 
 export default router
