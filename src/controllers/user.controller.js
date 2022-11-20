@@ -54,3 +54,20 @@ export async function SignUp(req,res){
         return
     }
 } 
+
+export async function LogOut(req, res){
+    const {authorization} = req.headers
+    
+    try{
+        await sessionsCollection.updateOne({token: authorization}, {$set:{
+            exitMoment: Date.now(),
+            status: "expired"
+        }})
+        
+        res.sendStatus(200)
+        return
+    }catch(err){
+        res.status(500).send({message: err})
+        return
+    }
+}

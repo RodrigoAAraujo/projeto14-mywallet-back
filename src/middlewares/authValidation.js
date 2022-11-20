@@ -1,13 +1,11 @@
 import { sessionsCollection, usersCollection } from "../database/db.js"
 
 export default async function authValidation(req,res,next){
-    console.log(req.headers)
-
     const {authorization, user} = req.headers
 
     const tokenReceived = authorization?.replace("Bearer ", "")
 
-    if (!tokenReceived) {
+    if (!tokenReceived || !user) {
         res.sendStatus(401);
         return
     }
@@ -16,7 +14,7 @@ export default async function authValidation(req,res,next){
         const session = await sessionsCollection.findOne({token: tokenReceived})
 
         if(!session){
-            res.status(401).send("Session invalid")
+            res.status(400).send("Bad Request")
             return
         }
 
