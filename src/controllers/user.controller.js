@@ -29,7 +29,6 @@ export async function SignIn(req, res){
         res.status(200).send(objectToSend)
         return
     }catch(err){
-        console.log("aqui")
         res.status(500).send({message: err})
         return
     }
@@ -54,6 +53,4 @@ export async function SignUp(req,res){
         res.status(500).send({message: err})
         return
     }
-
-
 } 
