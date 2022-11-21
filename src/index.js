@@ -9,4 +9,6 @@ app.use(cors())
 app.use(userRoutes)
 app.use(walletRoutes)
 
-app.listen(5000)
+const port = process.env.PORT || 5000
+
+app.listen(port)
